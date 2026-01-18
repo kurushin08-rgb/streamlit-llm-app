@@ -73,7 +73,7 @@ def get_system_message(expert_type):
 # LLM呼び出し関数
 # =========================
 from langchain_openai import ChatOpenAI
-from langchain.schema import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage
 
 def ask_llm(input_text, expert_type):
     system_message = get_system_message(expert_type)
