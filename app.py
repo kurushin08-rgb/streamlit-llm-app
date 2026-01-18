@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import streamlit as st
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage, HumanMessage
+
 st.title("サンプルアプリ: 専門選択型LLM Webアプリ")
 
 # =========================
@@ -67,14 +70,9 @@ def get_system_message(expert_type):
             "根拠を重視して論理的に回答してください。"
         )
 
- 
-
 # =========================
 # LLM呼び出し関数
 # =========================
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import SystemMessage, HumanMessage
-
 def ask_llm(input_text, expert_type):
     system_message = get_system_message(expert_type)
 
@@ -88,7 +86,7 @@ def ask_llm(input_text, expert_type):
         HumanMessage(content=input_text),
     ]
 
-    result = llm(messages)
+    result = llm.invoke(messages)
 
     return result.content
 
